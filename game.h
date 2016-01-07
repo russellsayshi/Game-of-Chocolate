@@ -4,4 +4,4 @@
 #define MY_TURN 1
 #define THEIR_TURN -1
 
-int decide_move(int);
+int decide_move(int, int);

@@ -8,13 +8,16 @@
 int main(void) {
     printf("Welcome to the chocolate game.\n");
     printf("Rules: each round, each player\n");
-    printf("may take 1-4 pieces of chocol-\n");
+    printf("may take 1-n pieces of chocol-\n");
     printf("ate. The person who takes the \n");
     printf("last piece wins. Good luck!\n");
     printf("------------------------------\n");
     printf("Enter the number of pieces (recommended 21): ");
     fflush(stdout);
     int pieces = handle_errors(get_integer(), 0, INT_MAX);
+    printf("Enter the max pieces per move (recommended 4): ");
+    fflush(stdout);
+    int potential_pieces = handle_errors(get_integer(), 2, INT_MAX);
     printf("Want to go first? (0/1) ");
     fflush(stdout);
     int turn = handle_errors(get_integer(), 0, 1);
@@ -25,10 +28,10 @@ int main(void) {
     }
     while(pieces > 0) {
         if(turn == MY_TURN) {
-            int move = decide_move(pieces);
+            int move = decide_move(pieces, potential_pieces);
             pieces -= move;
             if(pieces <= 0) {
-                printf("I subtract %d pieces to win.\n", pieces);
+                printf("I subtract %d pieces to win.\n", move);
                 break;
             } else {
                 printf("I subtract %d pieces and now there are %d total.\n", move, pieces);
@@ -36,7 +39,7 @@ int main(void) {
         } else {
             printf("Enter the number of pieces you take: ");
             fflush(stdout);
-            int move = handle_errors(get_integer(), 1, 4);
+            int move = handle_errors(get_integer(), 1, potential_pieces);
             pieces -= move;
             if(pieces <= 0) {
                 printf("You win!\n");
