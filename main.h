@@ -1,0 +1,1 @@
+int handle_errors(int, int, int);
