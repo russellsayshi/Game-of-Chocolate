@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "input.h"
 
 int get_integer(void) {
     char buf[16];
